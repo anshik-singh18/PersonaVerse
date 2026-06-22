@@ -24,7 +24,7 @@ app.use(express.json());
 
 // CORS — frontend (localhost:5173) ko backend call karne do
 app.use(cors({
-  origin: "http://localhost:5173",  // React app ka URL
+  origin: "*",  // React app ka URL
   credentials: true,
 }));
 

@@ -9,7 +9,7 @@
 // ============================================================
 
 // Backend ka base URL
-const BASE_URL = "http://localhost:5000/api";
+const BASE_URL = "https://personaverse-backend.onrender.com/api";
 
 // ── Helper: localStorage se token lo ──
 // Login ke baad token yahan save hoga
