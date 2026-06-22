@@ -1,0 +1,457 @@
+/* ============================================================
+   PERSONAVERSE — CreatePersonaPage.css
+   Single long form page to create a new admin persona
+   Same earthy cream theme as rest of the app
+   Fully responsive: Desktop → Tablet → Mobile
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Poppins:wght@300;400;500;600&display=swap');
+
+:root {
+  --cream:         #faf6f1;
+  --cream-dark:    #f0e8df;
+  --brown-light:   #e8dcd0;
+  --brown-mid:     #c4a882;
+  --brown-main:    #8b5e3c;
+  --brown-hover:   #6e4a2e;
+  --brown-dark:    #3b2f2f;
+  --text-muted:    #7a6050;
+  --navbar-bg:     rgba(250, 246, 241, 0.93);
+  --card-bg:       rgba(240, 232, 223, 0.60);
+  --divider:       rgba(196, 168, 130, 0.30);
+  --input-border:  rgba(196, 168, 130, 0.55);
+  --input-focus:   #8b5e3c;
+  --tag-bg:        rgba(139, 94, 60, 0.10);
+  --error:         #c0392b;
+}
+
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  background-color: var(--cream);
+  color: var(--brown-dark);
+}
+
+/* ============================================================
+   NAVBAR
+   ============================================================ */
+.cp-navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 48px;
+  background-color: var(--navbar-bg);
+  border-bottom: 1px solid var(--brown-light);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  backdrop-filter: blur(6px);
+}
+
+.cp-navbar__logo {
+  font-family: 'Playfair Display', serif;
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  color: var(--brown-dark);
+}
+
+/* Back to dashboard link */
+.cp-navbar__back {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  color: var(--text-muted);
+  cursor: pointer;
+  font-weight: 500;
+  transition: color 0.2s;
+  background: none;
+  border: none;
+  font-family: 'Poppins', sans-serif;
+}
+
+.cp-navbar__back:hover {
+  color: var(--brown-main);
+}
+
+/* ============================================================
+   PAGE WRAPPER
+   Full width layout with comfortable side padding
+   ============================================================ */
+.cp-page {
+  width: 100%;
+  padding: 48px 60px 80px;
+}
+
+/* Page heading */
+.cp-page__header {
+  margin-bottom: 40px;
+}
+
+.cp-page__tag {
+  display: inline-block;
+  background-color: var(--tag-bg);
+  color: var(--brown-main);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  padding: 4px 14px;
+  border-radius: 20px;
+  margin-bottom: 10px;
+}
+
+.cp-page__title {
+  font-family: 'Playfair Display', serif;
+  font-size: 32px;
+  color: var(--brown-dark);
+  margin-bottom: 8px;
+}
+
+.cp-page__subtitle {
+  font-size: 14px;
+  color: var(--text-muted);
+  line-height: 1.75;
+  max-width: 560px;
+}
+
+/* ============================================================
+   FORM SECTION CARD
+   Each group of fields is wrapped in a card
+   ============================================================ */
+.form-section {
+  background-color: var(--card-bg);
+  border: 1px solid var(--divider);
+  border-radius: 18px;
+  padding: 32px 28px;
+  margin-bottom: 24px;
+}
+
+/* Section heading inside card */
+.form-section__title {
+  font-family: 'Playfair Display', serif;
+  font-size: 19px;
+  color: var(--brown-dark);
+  margin-bottom: 6px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.form-section__desc {
+  font-size: 13px;
+  color: var(--text-muted);
+  margin-bottom: 24px;
+  line-height: 1.6;
+}
+
+/* Thin divider below section heading */
+.form-section__divider {
+  height: 1px;
+  background-color: var(--divider);
+  margin-bottom: 24px;
+}
+
+/* ============================================================
+   FORM FIELDS
+   ============================================================ */
+
+/* Two fields side by side */
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  margin-bottom: 20px;
+}
+
+/* Single full-width field */
+.form-row--full {
+  grid-template-columns: 1fr;
+}
+
+/* Label + input wrapper */
+.form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+/* Field label */
+.form-field__label {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--brown-dark);
+  letter-spacing: 0.3px;
+}
+
+/* Required star */
+.form-field__required {
+  color: var(--brown-main);
+  margin-left: 2px;
+}
+
+/* Helper text below label */
+.form-field__hint {
+  font-size: 11px;
+  color: var(--text-muted);
+  margin-top: -3px;
+}
+
+/* All input types — text, select, textarea */
+.form-input,
+.form-select,
+.form-textarea {
+  width: 100%;
+  padding: 11px 14px;
+  border: 1.5px solid var(--input-border);
+  border-radius: 10px;
+  font-size: 14px;
+  font-family: 'Poppins', sans-serif;
+  color: var(--brown-dark);
+  background-color: rgba(250, 246, 241, 0.80);
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.form-input:focus,
+.form-select:focus,
+.form-textarea:focus {
+  border-color: var(--input-focus);
+  box-shadow: 0 0 0 3px rgba(139, 94, 60, 0.12);
+  background-color: #fff;
+}
+
+.form-input::placeholder,
+.form-textarea::placeholder {
+  color: rgba(122, 96, 80, 0.50);
+  font-size: 13px;
+}
+
+/* Textarea specific */
+.form-textarea {
+  resize: vertical;
+  min-height: 100px;
+  line-height: 1.7;
+}
+
+/* Textarea taller for long fields */
+.form-textarea--tall {
+  min-height: 130px;
+}
+
+/* ── AVATAR EMOJI PICKER ── */
+.avatar-picker {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 4px;
+}
+
+.avatar-picker__option {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background-color: rgba(232, 220, 208, 0.50);
+  border: 2px solid transparent;
+  font-size: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: border-color 0.2s, background-color 0.2s, transform 0.15s;
+}
+
+.avatar-picker__option:hover {
+  background-color: rgba(196, 168, 130, 0.35);
+  transform: scale(1.08);
+}
+
+/* Selected avatar gets a brown border ring */
+.avatar-picker__option.selected {
+  border-color: var(--brown-main);
+  background-color: rgba(139, 94, 60, 0.14);
+}
+
+/* Trait checkboxes grid — 4 columns on desktop */
+.traits-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  margin-top: 4px;
+}
+
+.trait-checkbox {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 12px;
+  border-radius: 8px;
+  background-color: rgba(240, 232, 223, 0.50);
+  border: 1.5px solid transparent;
+  cursor: pointer;
+  font-size: 13px;
+  color: var(--text-muted);
+  transition: border-color 0.2s, background-color 0.2s, color 0.2s;
+  user-select: none;
+}
+
+.trait-checkbox:hover {
+  background-color: rgba(196, 168, 130, 0.25);
+}
+
+/* Selected trait */
+.trait-checkbox.selected {
+  border-color: var(--brown-main);
+  background-color: rgba(139, 94, 60, 0.10);
+  color: var(--brown-main);
+  font-weight: 600;
+}
+
+.trait-checkbox__dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: var(--brown-mid);
+  flex-shrink: 0;
+}
+
+.trait-checkbox.selected .trait-checkbox__dot {
+  background-color: var(--brown-main);
+}
+
+/* ── CHARACTER COUNT ── */
+.form-field__count {
+  font-size: 11px;
+  color: var(--text-muted);
+  text-align: right;
+  margin-top: 3px;
+}
+
+/* ── SUBMIT BUTTON ── */
+.cp-submit-row {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 16px;
+  margin-top: 8px;
+}
+
+.cp-cancel-btn {
+  background: none;
+  border: 1.5px solid var(--input-border);
+  color: var(--text-muted);
+  padding: 12px 28px;
+  border-radius: 30px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  font-family: 'Poppins', sans-serif;
+  transition: border-color 0.2s, color 0.2s;
+}
+
+.cp-cancel-btn:hover {
+  border-color: var(--brown-main);
+  color: var(--brown-main);
+}
+
+.cp-submit-btn {
+  background-color: var(--brown-main);
+  color: #fff;
+  border: none;
+  padding: 13px 36px;
+  border-radius: 30px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: 'Poppins', sans-serif;
+  transition: background-color 0.2s;
+}
+
+.cp-submit-btn:hover {
+  background-color: var(--brown-hover);
+}
+
+/* Disabled submit button while saving */
+.cp-submit-btn:disabled {
+  background-color: var(--brown-mid);
+  cursor: not-allowed;
+}
+
+/* ============================================================
+   RESPONSIVE — TABLET (max-width: 1024px)
+   ============================================================ */
+@media (max-width: 1024px) {
+  .cp-navbar {
+    padding: 14px 32px;
+  }
+
+  .cp-page {
+    padding: 32px 32px 60px;
+  }
+
+  .traits-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* ============================================================
+   RESPONSIVE — SMALL TABLET (max-width: 768px)
+   ============================================================ */
+@media (max-width: 768px) {
+  .cp-navbar {
+    padding: 14px 20px;
+  }
+
+  .cp-page {
+    padding: 24px 16px 60px;
+  }
+
+  /* Side-by-side fields become full width */
+  .form-row {
+    grid-template-columns: 1fr;
+  }
+
+  .traits-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .form-section {
+    padding: 24px 18px;
+  }
+}
+
+/* ============================================================
+   RESPONSIVE — MOBILE (max-width: 480px)
+   ============================================================ */
+@media (max-width: 480px) {
+  .cp-page__title {
+    font-size: 26px;
+  }
+
+  .traits-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .avatar-picker__option {
+    width: 42px;
+    height: 42px;
+    font-size: 20px;
+  }
+
+  .cp-submit-row {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .cp-submit-btn,
+  .cp-cancel-btn {
+    width: 100%;
+    text-align: center;
+  }
+}

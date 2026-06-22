@@ -1,0 +1,359 @@
+/* ============================================================
+   PERSONAVERSE — AuthPage.css
+   Login + Signup — earthy cream theme
+   Left: dark branding panel | Right: form (centered)
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Poppins:wght@300;400;500;600&display=swap');
+
+:root {
+  --cream:        #faf6f1;
+  --cream-dark:   #f0e8df;
+  --brown-light:  #e8dcd0;
+  --brown-mid:    #c4a882;
+  --brown-main:   #8b5e3c;
+  --brown-hover:  #6e4a2e;
+  --brown-dark:   #3b2f2f;
+  --text-muted:   #7a6050;
+  --divider:      rgba(196, 168, 130, 0.30);
+  --input-border: rgba(196, 168, 130, 0.55);
+  --error:        #c0392b;
+  --success:      #27ae60;
+}
+
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  background-color: var(--cream);
+  color: var(--brown-dark);
+}
+
+/* ============================================================
+   FULL PAGE — side by side two panels
+   ============================================================ */
+.auth-page {
+  display: flex;
+  width: 100%;
+  min-height: 100vh;
+  height: 100vh;
+}
+
+/* ── LEFT PANEL — dark branding ── */
+.auth-left {
+  flex: 1;
+  min-height: 100vh;
+  background-color: var(--brown-dark);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 60px 56px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Big faded emoji in background */
+.auth-left__bg-emoji {
+  position: absolute;
+  bottom: -20px;
+  right: -20px;
+  font-size: 220px;
+  opacity: 0.06;
+  line-height: 1;
+  pointer-events: none;
+  user-select: none;
+}
+
+.auth-left__logo {
+  font-family: 'Playfair Display', serif;
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  color: var(--brown-light);
+  margin-bottom: 60px;
+}
+
+.auth-left__tag {
+  display: inline-block;
+  background-color: rgba(196, 168, 130, 0.18);
+  color: var(--brown-mid);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  padding: 5px 14px;
+  border-radius: 20px;
+  margin-bottom: 20px;
+}
+
+.auth-left__title {
+  font-family: 'Playfair Display', serif;
+  font-size: 38px;
+  color: #fff;
+  line-height: 1.25;
+  margin-bottom: 20px;
+}
+
+.auth-left__subtitle {
+  font-size: 14px;
+  color: rgba(232, 220, 208, 0.70);
+  line-height: 1.85;
+  max-width: 360px;
+  margin-bottom: 48px;
+}
+
+.auth-left__points {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.auth-left__point {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 13px;
+  color: rgba(232, 220, 208, 0.80);
+}
+
+.auth-left__point-icon {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background-color: rgba(196, 168, 130, 0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  flex-shrink: 0;
+}
+
+/* ── RIGHT PANEL — form ──
+   flex: 1      → bacha hua poora space lega
+   align-items  → form ko horizontally center karega
+   ============================================================ */
+.auth-right {
+  flex: 1;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 60px 40px;
+  background-color: var(--cream);
+  overflow-y: auto;
+}
+
+/* Form ko limit karo — bahut wide na ho */
+.auth-right__inner {
+  width: 100%;
+  max-width: 420px;
+}
+
+/* ============================================================
+   TABS — Login | Sign Up
+   ============================================================ */
+.auth-tabs {
+  display: flex;
+  background-color: rgba(240, 232, 223, 0.70);
+  border-radius: 12px;
+  padding: 4px;
+  margin-bottom: 36px;
+  gap: 4px;
+}
+
+.auth-tab {
+  flex: 1;
+  padding: 10px;
+  border-radius: 9px;
+  border: none;
+  background: none;
+  font-size: 14px;
+  font-weight: 500;
+  font-family: 'Poppins', sans-serif;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: background-color 0.2s, color 0.2s;
+}
+
+.auth-tab.active {
+  background-color: #fff;
+  color: var(--brown-main);
+  font-weight: 600;
+  box-shadow: 0 1px 4px rgba(139, 94, 60, 0.12);
+}
+
+/* ============================================================
+   FORM HEADING
+   ============================================================ */
+.auth-form__title {
+  font-family: 'Playfair Display', serif;
+  font-size: 26px;
+  color: var(--brown-dark);
+  margin-bottom: 6px;
+}
+
+.auth-form__subtitle {
+  font-size: 13px;
+  color: var(--text-muted);
+  margin-bottom: 28px;
+  line-height: 1.6;
+}
+
+/* ============================================================
+   FORM FIELDS
+   ============================================================ */
+.auth-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 16px;
+}
+
+.auth-field__label {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--brown-dark);
+}
+
+.auth-field__input {
+  width: 100%;
+  padding: 12px 16px;
+  border: 1.5px solid var(--input-border);
+  border-radius: 10px;
+  font-size: 14px;
+  font-family: 'Poppins', sans-serif;
+  color: var(--brown-dark);
+  background-color: rgba(250, 246, 241, 0.80);
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.auth-field__input:focus {
+  border-color: var(--brown-main);
+  box-shadow: 0 0 0 3px rgba(139, 94, 60, 0.10);
+  background-color: #fff;
+}
+
+.auth-field__input::placeholder {
+  color: rgba(122, 96, 80, 0.45);
+  font-size: 13px;
+}
+
+/* Forgot password */
+.auth-forgot {
+  text-align: right;
+  margin-top: -8px;
+  margin-bottom: 16px;
+}
+
+.auth-forgot__link {
+  font-size: 12px;
+  color: var(--brown-main);
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.auth-forgot__link:hover {
+  color: var(--brown-hover);
+}
+
+/* ============================================================
+   SUBMIT BUTTON
+   ============================================================ */
+.auth-submit-btn {
+  width: 100%;
+  padding: 13px;
+  background-color: var(--brown-main);
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  font-size: 15px;
+  font-weight: 600;
+  font-family: 'Poppins', sans-serif;
+  cursor: pointer;
+  margin-top: 8px;
+  transition: background-color 0.2s;
+}
+
+.auth-submit-btn:hover {
+  background-color: var(--brown-hover);
+}
+
+.auth-submit-btn:disabled {
+  background-color: var(--brown-mid);
+  cursor: not-allowed;
+}
+
+/* ============================================================
+   SWITCH TEXT — "Don't have an account? Sign up"
+   ============================================================ */
+.auth-switch {
+  text-align: center;
+  margin-top: 24px;
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+.auth-switch__link {
+  color: var(--brown-main);
+  font-weight: 600;
+  cursor: pointer;
+  margin-left: 4px;
+}
+
+.auth-switch__link:hover {
+  color: var(--brown-hover);
+}
+
+/* ============================================================
+   ERROR / SUCCESS BANNER
+   ============================================================ */
+.auth-banner {
+  padding: 12px 16px;
+  border-radius: 10px;
+  font-size: 13px;
+  margin-bottom: 18px;
+  font-weight: 500;
+}
+
+.auth-banner--error {
+  background-color: rgba(192, 57, 43, 0.09);
+  color: var(--error);
+  border: 1px solid rgba(192, 57, 43, 0.20);
+}
+
+.auth-banner--success {
+  background-color: rgba(39, 174, 96, 0.09);
+  color: var(--success);
+  border: 1px solid rgba(39, 174, 96, 0.20);
+}
+
+/* ============================================================
+   RESPONSIVE — TABLET (max-width: 900px)
+   Left panel hides
+   ============================================================ */
+@media (max-width: 900px) {
+  .auth-left {
+    display: none;
+  }
+
+  .auth-right {
+    width: 100%;
+    padding: 48px 32px;
+  }
+}
+
+/* ============================================================
+   RESPONSIVE — MOBILE (max-width: 480px)
+   ============================================================ */
+@media (max-width: 480px) {
+  .auth-right {
+    padding: 40px 20px;
+  }
+}

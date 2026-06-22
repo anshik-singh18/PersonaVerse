@@ -1,0 +1,509 @@
+/* ============================================================
+   PERSONAVERSE — ChatPage.css
+   Chat interface between user and an AI persona
+   Same earthy cream theme as rest of the app
+   Fully responsive: Desktop → Tablet → Mobile
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Poppins:wght@300;400;500;600&display=swap');
+
+:root {
+  --cream:         #faf6f1;
+  --cream-dark:    #f0e8df;
+  --brown-light:   #e8dcd0;
+  --brown-mid:     #c4a882;
+  --brown-main:    #8b5e3c;
+  --brown-hover:   #6e4a2e;
+  --brown-dark:    #3b2f2f;
+  --text-muted:    #7a6050;
+  --navbar-bg:     rgba(250, 246, 241, 0.95);
+  --divider:       rgba(196, 168, 130, 0.30);
+  --user-bubble:   #8b5e3c;
+  --ai-bubble:     rgba(240, 232, 223, 0.80);
+}
+
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  background-color: var(--cream);
+  color: var(--brown-dark);
+}
+
+/* ============================================================
+   FULL PAGE LAYOUT
+   Navbar on top, then chat area fills remaining height
+   ============================================================ */
+.chat-page {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+}
+
+/* ============================================================
+   NAVBAR
+   Shows persona info on left, back button on right
+   ============================================================ */
+.chat-navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 28px;
+  background-color: var(--navbar-bg);
+  border-bottom: 1px solid var(--brown-light);
+  flex-shrink: 0;         /* navbar never shrinks */
+  backdrop-filter: blur(6px);
+  z-index: 10;
+}
+
+/* Left: avatar + persona name + status */
+.chat-navbar__persona {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.chat-navbar__avatar {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background-color: rgba(196, 168, 130, 0.30);
+  border: 2px solid rgba(196, 168, 130, 0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  flex-shrink: 0;
+}
+
+.chat-navbar__name {
+  font-family: 'Playfair Display', serif;
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--brown-dark);
+  line-height: 1.2;
+}
+
+.chat-navbar__status {
+  font-size: 12px;
+  color: var(--text-muted);
+  margin-top: 2px;
+}
+
+/* Green dot for "online" status */
+.chat-navbar__status::before {
+  content: "●";
+  color: #6abf69;
+  font-size: 9px;
+  margin-right: 5px;
+}
+
+/* Right: back button */
+.chat-navbar__back {
+  background: none;
+  border: 1.5px solid var(--divider);
+  color: var(--text-muted);
+  padding: 7px 18px;
+  border-radius: 30px;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  font-family: 'Poppins', sans-serif;
+  transition: border-color 0.2s, color 0.2s;
+}
+
+.chat-navbar__back:hover {
+  border-color: var(--brown-main);
+  color: var(--brown-main);
+}
+
+/* ============================================================
+   CHAT BODY LAYOUT
+   Left: chat messages | Right: persona info panel
+   ============================================================ */
+.chat-body {
+  display: flex;
+  flex: 1;
+  overflow: hidden;       /* children handle their own scroll */
+}
+
+/* ============================================================
+   MESSAGES AREA (left/main column)
+   ============================================================ */
+.chat-messages-col {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* Scrollable messages list */
+.chat-messages {
+  flex: 1;
+  overflow-y: auto;       /* only this scrolls */
+  padding: 28px 28px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+/* Custom scrollbar styling */
+.chat-messages::-webkit-scrollbar {
+  width: 5px;
+}
+
+.chat-messages::-webkit-scrollbar-thumb {
+  background-color: rgba(196, 168, 130, 0.45);
+  border-radius: 4px;
+}
+
+/* ── Date separator (e.g. "Today") ── */
+.chat-date-separator {
+  text-align: center;
+  font-size: 11px;
+  color: var(--text-muted);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 4px 0;
+}
+
+.chat-date-separator::before,
+.chat-date-separator::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background-color: var(--divider);
+}
+
+/* ── Single message row ── */
+.chat-message {
+  display: flex;
+  align-items: flex-end;
+  gap: 10px;
+  max-width: 72%;
+}
+
+/* User message — aligned to right */
+.chat-message--user {
+  align-self: flex-end;
+  flex-direction: row-reverse;
+}
+
+/* AI message — aligned to left */
+.chat-message--ai {
+  align-self: flex-start;
+}
+
+/* Small avatar circle next to message */
+.chat-message__avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background-color: rgba(196, 168, 130, 0.30);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  flex-shrink: 0;
+  border: 1.5px solid rgba(196, 168, 130, 0.35);
+}
+
+/* Message bubble */
+.chat-message__bubble {
+  padding: 12px 16px;
+  border-radius: 18px;
+  font-size: 14px;
+  line-height: 1.75;
+  max-width: 100%;
+  word-wrap: break-word;
+}
+
+/* USER bubble — brown, white text, round on left */
+.chat-message--user .chat-message__bubble {
+  background-color: var(--user-bubble);
+  color: #fff;
+  border-bottom-right-radius: 4px;   /* flat corner on side of avatar */
+}
+
+/* AI bubble — cream, brown text, round on right */
+.chat-message--ai .chat-message__bubble {
+  background-color: var(--ai-bubble);
+  color: var(--brown-dark);
+  border: 1px solid var(--divider);
+  border-bottom-left-radius: 4px;    /* flat corner on side of avatar */
+}
+
+/* Timestamp below bubble */
+.chat-message__time {
+  font-size: 10px;
+  color: var(--text-muted);
+  margin-top: 5px;
+  opacity: 0.75;
+  text-align: right;
+}
+
+.chat-message--ai .chat-message__time {
+  text-align: left;
+}
+
+/* ── Typing indicator (AI is thinking...) ── */
+.chat-typing {
+  display: flex;
+  align-items: flex-end;
+  gap: 10px;
+  align-self: flex-start;
+}
+
+.chat-typing__bubble {
+  background-color: var(--ai-bubble);
+  border: 1px solid var(--divider);
+  border-radius: 18px;
+  border-bottom-left-radius: 4px;
+  padding: 14px 18px;
+  display: flex;
+  gap: 5px;
+  align-items: center;
+}
+
+/* Three animated dots */
+.chat-typing__dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background-color: var(--brown-mid);
+  opacity: 0.6;
+}
+
+/* Simple CSS animation — no library needed */
+.chat-typing__dot:nth-child(1) { animation: blink 1.2s infinite 0s; }
+.chat-typing__dot:nth-child(2) { animation: blink 1.2s infinite 0.2s; }
+.chat-typing__dot:nth-child(3) { animation: blink 1.2s infinite 0.4s; }
+
+@keyframes blink {
+  0%, 80%, 100% { opacity: 0.25; transform: scale(1);    }
+  40%           { opacity: 1;    transform: scale(1.2);  }
+}
+
+/* ============================================================
+   INPUT BAR (bottom of chat)
+   ============================================================ */
+.chat-input-bar {
+  padding: 16px 24px;
+  border-top: 1px solid var(--divider);
+  background-color: rgba(250, 246, 241, 0.95);
+  display: flex;
+  align-items: flex-end;
+  gap: 12px;
+  flex-shrink: 0;
+}
+
+/* Text input */
+.chat-input-bar__input {
+  flex: 1;
+  padding: 12px 18px;
+  border: 1.5px solid rgba(196, 168, 130, 0.55);
+  border-radius: 24px;
+  font-size: 14px;
+  font-family: 'Poppins', sans-serif;
+  color: var(--brown-dark);
+  background-color: #fff;
+  outline: none;
+  resize: none;
+  line-height: 1.5;
+  max-height: 120px;      /* stops growing after 4 lines */
+  overflow-y: auto;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.chat-input-bar__input:focus {
+  border-color: var(--brown-main);
+  box-shadow: 0 0 0 3px rgba(139, 94, 60, 0.10);
+}
+
+.chat-input-bar__input::placeholder {
+  color: rgba(122, 96, 80, 0.45);
+}
+
+/* Send button */
+.chat-input-bar__send {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background-color: var(--brown-main);
+  border: none;
+  color: #fff;
+  font-size: 18px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: background-color 0.2s, transform 0.15s;
+}
+
+.chat-input-bar__send:hover {
+  background-color: var(--brown-hover);
+  transform: scale(1.06);
+}
+
+/* Disabled send button when input is empty */
+.chat-input-bar__send:disabled {
+  background-color: var(--brown-mid);
+  cursor: not-allowed;
+  transform: none;
+  opacity: 0.65;
+}
+
+/* ============================================================
+   PERSONA INFO PANEL (right sidebar)
+   Shows persona details next to chat
+   ============================================================ */
+.chat-info-panel {
+  width: 260px;
+  border-left: 1px solid var(--divider);
+  background-color: rgba(240, 232, 223, 0.40);
+  overflow-y: auto;
+  padding: 28px 20px;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Large avatar at top of panel */
+.info-panel__avatar {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background-color: rgba(196, 168, 130, 0.30);
+  border: 2px solid rgba(196, 168, 130, 0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 38px;
+  margin: 0 auto 4px;
+}
+
+.info-panel__name {
+  font-family: 'Playfair Display', serif;
+  font-size: 17px;
+  color: var(--brown-dark);
+  text-align: center;
+  font-weight: 700;
+}
+
+.info-panel__profession {
+  display: inline-block;
+  background-color: rgba(139, 94, 60, 0.10);
+  color: var(--brown-main);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  padding: 3px 12px;
+  border-radius: 20px;
+  margin: 4px auto 0;
+  display: block;
+  text-align: center;
+}
+
+/* Divider line inside panel */
+.info-panel__divider {
+  height: 1px;
+  background-color: var(--divider);
+}
+
+/* Info row — label + value */
+.info-panel__row {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.info-panel__label {
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--brown-mid);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.info-panel__value {
+  font-size: 13px;
+  color: var(--brown-dark);
+  line-height: 1.6;
+}
+
+/* Traits chips */
+.info-panel__traits {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 2px;
+}
+
+.info-panel__trait {
+  background-color: rgba(196, 168, 130, 0.25);
+  color: var(--text-muted);
+  font-size: 11px;
+  padding: 3px 10px;
+  border-radius: 20px;
+  font-weight: 500;
+}
+
+/* ============================================================
+   RESPONSIVE — TABLET (max-width: 860px)
+   Hide info panel
+   ============================================================ */
+@media (max-width: 860px) {
+  .chat-info-panel {
+    display: none;
+  }
+
+  .chat-navbar {
+    padding: 12px 18px;
+  }
+
+  .chat-messages {
+    padding: 20px 18px 10px;
+  }
+
+  .chat-input-bar {
+    padding: 12px 16px;
+  }
+
+  .chat-message {
+    max-width: 85%;
+  }
+}
+
+/* ============================================================
+   RESPONSIVE — MOBILE (max-width: 480px)
+   ============================================================ */
+@media (max-width: 480px) {
+  .chat-navbar__back span {
+    display: none;    /* hide "Back" text, keep arrow only */
+  }
+
+  .chat-message {
+    max-width: 92%;
+  }
+
+  .chat-message__bubble {
+    font-size: 13px;
+    padding: 10px 14px;
+  }
+
+  .chat-input-bar__input {
+    font-size: 13px;
+  }
+}

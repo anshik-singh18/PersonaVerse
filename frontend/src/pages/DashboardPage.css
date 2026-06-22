@@ -1,0 +1,613 @@
+/* ============================================================
+   PERSONAVERSE — DashboardPage.css
+   Sidebar + Main Content layout
+   Same earthy cream theme as HomePage
+   Fully responsive: Desktop → Tablet → Mobile
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Poppins:wght@300;400;500;600&display=swap');
+
+/* ── CSS Variables (same as HomePage) ── */
+:root {
+  --cream:         #faf6f1;
+  --cream-dark:    #f0e8df;
+  --brown-light:   #e8dcd0;
+  --brown-mid:     #c4a882;
+  --brown-main:    #8b5e3c;
+  --brown-hover:   #6e4a2e;
+  --brown-dark:    #3b2f2f;
+  --text-muted:    #7a6050;
+  --card-bg:       rgba(240, 232, 223, 0.65);
+  --card-bg-hover: rgba(232, 220, 208, 0.95);
+  --navbar-bg:     rgba(250, 246, 241, 0.93);
+  --divider:       rgba(196, 168, 130, 0.30);
+  --tag-bg:        rgba(139, 94, 60, 0.12);
+  --sidebar-width: 240px;
+}
+
+/* ============================================================
+   GLOBAL RESET
+   ============================================================ */
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  background-color: var(--cream);
+  color: var(--brown-dark);
+}
+
+/* ============================================================
+   NAVBAR
+   ============================================================ */
+.dash-navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 32px;
+  background-color: var(--navbar-bg);
+  border-bottom: 1px solid var(--brown-light);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  backdrop-filter: blur(6px);
+}
+
+.dash-navbar__logo {
+  font-family: 'Playfair Display', serif;
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  color: var(--brown-dark);
+}
+
+.dash-navbar__right {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+/* Username display */
+.dash-navbar__user {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+.dash-navbar__user-avatar {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background-color: rgba(139, 94, 60, 0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+}
+
+/* Logout button */
+.dash-navbar__logout {
+  background-color: transparent;
+  color: var(--brown-main);
+  border: 1.5px solid var(--brown-main);
+  padding: 7px 18px;
+  border-radius: 30px;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  font-family: 'Poppins', sans-serif;
+  transition: background-color 0.2s, color 0.2s;
+}
+
+.dash-navbar__logout:hover {
+  background-color: var(--brown-main);
+  color: #fff;
+}
+
+/* ============================================================
+   PAGE LAYOUT
+   Sidebar on left, main content on right
+   ============================================================ */
+.dash-layout {
+  display: flex;
+  min-height: calc(100vh - 62px); /* full height minus navbar */
+}
+
+/* ============================================================
+   SIDEBAR
+   ============================================================ */
+.dash-sidebar {
+  width: var(--sidebar-width);
+  background-color: rgba(240, 232, 223, 0.55);
+  border-right: 1px solid var(--divider);
+  padding: 28px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  flex-shrink: 0;
+  position: sticky;
+  top: 62px;          /* sticks below navbar */
+  height: calc(100vh - 62px);
+  overflow-y: auto;
+}
+
+/* Each nav link in sidebar */
+.sidebar__item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 11px 14px;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: background-color 0.2s, color 0.2s;
+  border: none;
+  background: none;
+  font-family: 'Poppins', sans-serif;
+  width: 100%;
+  text-align: left;
+}
+
+.sidebar__item:hover {
+  background-color: rgba(139, 94, 60, 0.10);
+  color: var(--brown-main);
+}
+
+/* Active/selected sidebar item */
+.sidebar__item.active {
+  background-color: rgba(139, 94, 60, 0.14);
+  color: var(--brown-main);
+  font-weight: 600;
+}
+
+.sidebar__item-icon {
+  font-size: 18px;
+  width: 22px;
+  text-align: center;
+}
+
+/* Divider line in sidebar */
+.sidebar__divider {
+  height: 1px;
+  background-color: var(--divider);
+  margin: 10px 6px;
+}
+
+/* New Profile button at bottom of sidebar */
+.sidebar__new-btn {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 11px 14px;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #fff;
+  background-color: var(--brown-main);
+  cursor: pointer;
+  border: none;
+  font-family: 'Poppins', sans-serif;
+  width: 100%;
+  text-align: left;
+  margin-top: auto; /* pushes to bottom */
+  transition: background-color 0.2s;
+}
+
+.sidebar__new-btn:hover {
+  background-color: var(--brown-hover);
+}
+
+/* ============================================================
+   MAIN CONTENT AREA
+   ============================================================ */
+.dash-main {
+  flex: 1;
+  padding: 32px 36px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 36px;
+}
+
+/* ── Welcome Banner ── */
+.welcome-banner {
+  background-color: rgba(240, 232, 223, 0.70);
+  border: 1px solid var(--divider);
+  border-radius: 16px;
+  padding: 28px 32px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.welcome-banner__title {
+  font-family: 'Playfair Display', serif;
+  font-size: 26px;
+  color: var(--brown-dark);
+  margin-bottom: 6px;
+}
+
+.welcome-banner__subtitle {
+  font-size: 13px;
+  color: var(--text-muted);
+  line-height: 1.7;
+}
+
+.welcome-banner__emoji {
+  font-size: 52px;
+  opacity: 0.80;
+}
+
+/* ── Quick Stats Row ── */
+.stats-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+.stat-box {
+  background-color: var(--card-bg);
+  border: 1px solid var(--divider);
+  border-radius: 14px;
+  padding: 20px 22px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.stat-box__icon {
+  font-size: 28px;
+  width: 48px;
+  height: 48px;
+  background-color: rgba(139, 94, 60, 0.12);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.stat-box__number {
+  font-family: 'Playfair Display', serif;
+  font-size: 26px;
+  color: var(--brown-dark);
+  font-weight: 700;
+  line-height: 1;
+}
+
+.stat-box__label {
+  font-size: 12px;
+  color: var(--text-muted);
+  margin-top: 3px;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+}
+
+/* ── Section heading inside main content ── */
+.content-section__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.content-section__title {
+  font-family: 'Playfair Display', serif;
+  font-size: 22px;
+  color: var(--brown-dark);
+}
+
+.content-section__tag {
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+/* Add New button next to section heading */
+.add-new-btn {
+  background-color: var(--brown-main);
+  color: #fff;
+  border: none;
+  padding: 9px 22px;
+  border-radius: 30px;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  font-family: 'Poppins', sans-serif;
+  transition: background-color 0.2s;
+}
+
+.add-new-btn:hover {
+  background-color: var(--brown-hover);
+}
+
+/* ============================================================
+   PERSONA CARDS GRID
+   Cards showing saved admin profiles
+   ============================================================ */
+.personas-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+/* Single persona card */
+.persona-card {
+  background-color: var(--card-bg);
+  border: 1px solid var(--divider);
+  border-radius: 16px;
+  padding: 24px 20px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  cursor: pointer;
+  transition: background-color 0.2s, transform 0.2s, box-shadow 0.2s;
+}
+
+.persona-card:hover {
+  background-color: var(--card-bg-hover);
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(139, 94, 60, 0.12);
+}
+
+/* Avatar circle at top of card */
+.persona-card__avatar {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background-color: rgba(196, 168, 130, 0.30);
+  border: 2px solid rgba(196, 168, 130, 0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 36px;
+  margin-bottom: 14px;
+  flex-shrink: 0;
+}
+
+/* Persona name */
+.persona-card__name {
+  font-family: 'Playfair Display', serif;
+  font-size: 16px;
+  color: var(--brown-dark);
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+/* Profession tag */
+.persona-card__profession {
+  display: inline-block;
+  background-color: var(--tag-bg);
+  color: var(--brown-main);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  padding: 3px 10px;
+  border-radius: 20px;
+  margin-bottom: 10px;
+}
+
+/* Short detail/bio */
+.persona-card__detail {
+  font-size: 12px;
+  color: var(--text-muted);
+  line-height: 1.7;
+  margin-bottom: 18px;
+  flex: 1; /* pushes chat button to bottom */
+}
+
+/* Chat button at bottom of card */
+.persona-card__chat-btn {
+  width: 100%;
+  background-color: var(--brown-main);
+  color: #fff;
+  border: none;
+  padding: 9px 0;
+  border-radius: 30px;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  font-family: 'Poppins', sans-serif;
+  transition: background-color 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+
+.persona-card__chat-btn:hover {
+  background-color: var(--brown-hover);
+}
+
+/* "Add New Persona" empty card */
+.persona-card--empty {
+  border: 2px dashed rgba(196, 168, 130, 0.50);
+  background-color: rgba(240, 232, 223, 0.30);
+  justify-content: center;
+  min-height: 220px;
+  gap: 10px;
+}
+
+.persona-card--empty:hover {
+  background-color: rgba(240, 232, 223, 0.55);
+  transform: translateY(-2px);
+  box-shadow: none;
+}
+
+.persona-card--empty .empty-plus {
+  font-size: 32px;
+  color: var(--brown-mid);
+  line-height: 1;
+}
+
+.persona-card--empty .empty-text {
+  font-size: 13px;
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+/* ============================================================
+   RECENT CHATS LIST
+   ============================================================ */
+.chats-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* Single recent chat row */
+.chat-row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  background-color: var(--card-bg);
+  border: 1px solid var(--divider);
+  border-radius: 12px;
+  padding: 14px 18px;
+  cursor: pointer;
+  transition: background-color 0.2s, transform 0.2s;
+}
+
+.chat-row:hover {
+  background-color: var(--card-bg-hover);
+  transform: translateX(4px);
+}
+
+.chat-row__avatar {
+  font-size: 28px;
+  width: 44px;
+  height: 44px;
+  background-color: rgba(196, 168, 130, 0.25);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.chat-row__info {
+  flex: 1;
+}
+
+.chat-row__name {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--brown-dark);
+  margin-bottom: 3px;
+}
+
+.chat-row__preview {
+  font-size: 12px;
+  color: var(--text-muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 360px;
+}
+
+.chat-row__time {
+  font-size: 11px;
+  color: var(--brown-mid);
+  flex-shrink: 0;
+}
+
+/* ============================================================
+   RESPONSIVE — TABLET (max-width: 900px)
+   ============================================================ */
+@media (max-width: 900px) {
+  /* Sidebar hides, becomes top strip */
+  .dash-sidebar {
+    width: 100%;
+    height: auto;
+    flex-direction: row;
+    flex-wrap: wrap;
+    position: static;
+    border-right: none;
+    border-bottom: 1px solid var(--divider);
+    padding: 12px 16px;
+    gap: 4px;
+  }
+
+  .dash-layout {
+    flex-direction: column;
+  }
+
+  .sidebar__new-btn {
+    margin-top: 0;
+    width: auto;
+  }
+
+  .sidebar__divider {
+    display: none;
+  }
+
+  /* Cards: 2 columns */
+  .personas-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .stats-row {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .dash-main {
+    padding: 24px 20px;
+  }
+}
+
+/* ============================================================
+   RESPONSIVE — MOBILE (max-width: 560px)
+   ============================================================ */
+@media (max-width: 560px) {
+  .dash-navbar {
+    padding: 12px 20px;
+  }
+
+  .dash-navbar__logo {
+    font-size: 17px;
+  }
+
+  /* Stats: 1 column */
+  .stats-row {
+    grid-template-columns: 1fr;
+  }
+
+  /* Persona cards: 1 column */
+  .personas-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .welcome-banner {
+    padding: 20px;
+  }
+
+  .welcome-banner__title {
+    font-size: 20px;
+  }
+
+  .welcome-banner__emoji {
+    display: none;
+  }
+
+  .dash-main {
+    padding: 20px 16px;
+    gap: 24px;
+  }
+
+  .chat-row__preview {
+    max-width: 180px;
+  }
+}

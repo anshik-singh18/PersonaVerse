@@ -1,0 +1,593 @@
+/* ============================================================
+   PERSONAVERSE — HomePage.css
+   All styles for the Home Page
+   Uses rgba() opacity throughout for a layered, soft look
+   Fully responsive: Desktop → Tablet → Mobile
+   ============================================================ */
+
+/* ── Google Fonts Import ── */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Poppins:wght@300;400;500;600&display=swap');
+
+/* ── CSS Variables (change colors here once, applies everywhere) ── */
+:root {
+  --cream:         #faf6f1;
+  --cream-dark:    #f0e8df;
+  --brown-light:   #e8dcd0;
+  --brown-mid:     #c4a882;
+  --brown-main:    #8b5e3c;
+  --brown-hover:   #6e4a2e;
+  --brown-dark:    #3b2f2f;
+  --text-muted:    #7a6050;
+
+  /* Opacity versions used throughout */
+  --card-bg:       rgba(240, 232, 223, 0.65);
+  --card-bg-hover: rgba(232, 220, 208, 0.95);
+  --navbar-bg:     rgba(250, 246, 241, 0.93);
+  --section-bg:    rgba(240, 232, 223, 0.50);
+  --tag-bg:        rgba(139, 94, 60, 0.12);
+  --divider:       rgba(196, 168, 130, 0.30);
+}
+
+/* ============================================================
+   GLOBAL RESET
+   ============================================================ */
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  background-color: var(--cream);
+  color: var(--brown-dark);
+}
+
+/* ============================================================
+   NAVBAR
+   Sticky top bar — logo left, links right
+   ============================================================ */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 60px;
+  background-color: var(--navbar-bg);       /* cream at 93% opacity */
+  border-bottom: 1px solid var(--brown-light);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  backdrop-filter: blur(6px);               /* frosted glass effect */
+}
+
+.navbar__logo {
+  font-family: 'Playfair Display', serif;
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  color: var(--brown-dark);
+}
+
+/* Nav links wrapper */
+.navbar__links {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+}
+
+.navbar__link {
+  text-decoration: none;
+  color: var(--text-muted);
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.navbar__link:hover {
+  color: var(--brown-main);
+}
+
+/* Login button in navbar */
+.navbar__btn {
+  background-color: var(--brown-main);
+  color: #fff;
+  border: none;
+  padding: 9px 26px;
+  border-radius: 30px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  font-family: 'Poppins', sans-serif;
+  transition: background-color 0.2s;
+}
+
+.navbar__btn:hover {
+  background-color: var(--brown-hover);
+}
+
+/* Hamburger icon — hidden on desktop, shown on mobile */
+.navbar__hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+  background: none;
+  border: none;
+  padding: 4px;
+}
+
+.navbar__hamburger span {
+  display: block;
+  width: 24px;
+  height: 2px;
+  background-color: var(--brown-dark);
+  border-radius: 2px;
+}
+
+/* Mobile nav dropdown — hidden by default */
+.navbar__mobile-menu {
+  display: none;
+  flex-direction: column;
+  gap: 16px;
+  padding: 20px 24px;
+  background-color: var(--cream);
+  border-bottom: 1px solid var(--brown-light);
+}
+
+.navbar__mobile-menu.open {
+  display: flex;
+}
+
+.navbar__mobile-menu .navbar__link {
+  font-size: 15px;
+}
+
+.navbar__mobile-menu .navbar__btn {
+  align-self: flex-start;
+}
+
+/* ============================================================
+   HERO SECTION
+   Left: headline + description + CTA
+   Right: cartoon avatar
+   ============================================================ */
+.hero {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 80px 60px 70px;
+  background-color: var(--cream-dark);
+  gap: 40px;
+}
+
+/* Left text block */
+.hero__left {
+  max-width: 540px;
+}
+
+/* Small pill tag above headline */
+.hero__tag {
+  display: inline-block;
+  background-color: rgba(196, 168, 130, 0.28);
+  color: var(--brown-main);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  padding: 5px 14px;
+  border-radius: 20px;
+  margin-bottom: 18px;
+}
+
+.hero__title {
+  font-family: 'Playfair Display', serif;
+  font-size: 46px;
+  line-height: 1.2;
+  color: var(--brown-dark);
+  margin-bottom: 18px;
+}
+
+.hero__subtitle {
+  font-size: 15px;
+  color: var(--text-muted);
+  line-height: 1.85;
+  margin-bottom: 32px;
+  max-width: 460px;
+}
+
+.hero__btn {
+  background-color: var(--brown-main);
+  color: #fff;
+  border: none;
+  padding: 14px 36px;
+  border-radius: 30px;
+  font-size: 15px;
+  font-weight: 500;
+  cursor: pointer;
+  font-family: 'Poppins', sans-serif;
+  transition: background-color 0.2s;
+}
+
+.hero__btn:hover {
+  background-color: var(--brown-hover);
+}
+
+/* Cartoon avatar box — right side of hero */
+.hero__avatar {
+  width: 230px;
+  height: 270px;
+  background-color: rgba(232, 220, 208, 0.60);  /* light brown, 60% opacity */
+  border-radius: 50% 50% 46% 46%;               /* egg shape */
+  border: 2px solid rgba(196, 168, 130, 0.40);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  flex-shrink: 0;
+}
+
+.hero__avatar-emoji {
+  font-size: 80px;
+  line-height: 1;
+}
+
+.hero__avatar-label {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--brown-main);
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+}
+
+/* ============================================================
+   SECTION SHARED STYLES
+   Reused across Dashboard and How It Works sections
+   ============================================================ */
+.section {
+  padding: 70px 60px;
+}
+
+.section--tinted {
+  background-color: var(--section-bg);       /* cream at 50% opacity */
+}
+
+/* Section header: tag + title + description */
+.section__header {
+  text-align: center;
+  margin-bottom: 48px;
+}
+
+.section__tag {
+  display: inline-block;
+  background-color: var(--tag-bg);           /* brown at 12% opacity */
+  color: var(--brown-main);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  padding: 5px 14px;
+  border-radius: 20px;
+  margin-bottom: 12px;
+}
+
+.section__title {
+  font-family: 'Playfair Display', serif;
+  font-size: 30px;
+  color: var(--brown-dark);
+  margin-bottom: 10px;
+}
+
+.section__desc {
+  font-size: 14px;
+  color: var(--text-muted);
+  max-width: 500px;
+  margin: 0 auto;
+  line-height: 1.8;
+}
+
+/* ============================================================
+   FEATURE CARDS GRID
+   3 columns on desktop, 2 on tablet, 1 on mobile
+   ============================================================ */
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 22px;
+}
+
+/* Single card */
+.card {
+  background-color: var(--card-bg);          /* translucent card */
+  border-radius: 16px;
+  padding: 30px 24px;
+  border: 1px solid var(--divider);
+  cursor: pointer;
+  transition: opacity 0.2s, background-color 0.2s, transform 0.2s;
+  opacity: 0.90;
+}
+
+.card:hover {
+  background-color: var(--card-bg-hover);   /* more opaque on hover */
+  opacity: 1;
+  transform: translateY(-4px);              /* subtle lift */
+  box-shadow: 0 8px 24px rgba(139, 94, 60, 0.10);
+}
+
+.card__icon {
+  font-size: 34px;
+  margin-bottom: 14px;
+}
+
+.card__title {
+  font-family: 'Playfair Display', serif;
+  font-size: 17px;
+  color: var(--brown-dark);
+  margin-bottom: 8px;
+}
+
+.card__desc {
+  font-size: 13px;
+  color: var(--text-muted);
+  line-height: 1.75;
+}
+
+.card__link {
+  display: inline-block;
+  margin-top: 14px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--brown-main);
+  cursor: pointer;
+}
+
+.card__link:hover {
+  color: var(--brown-hover);
+}
+
+/* ============================================================
+   HOW IT WORKS — STEPS ROW
+   Step circles with arrows between them
+   ============================================================ */
+.steps-row {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+/* Single step column */
+.step {
+  flex: 1;
+  min-width: 160px;
+  max-width: 220px;
+  text-align: center;
+  padding: 0 12px;
+}
+
+/* Numbered circle */
+.step__circle {
+  width: 58px;
+  height: 58px;
+  background-color: var(--brown-main);
+  color: #fff;
+  border-radius: 50%;
+  font-family: 'Playfair Display', serif;
+  font-size: 22px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 18px;
+}
+
+.step__title {
+  font-family: 'Playfair Display', serif;
+  font-size: 16px;
+  color: var(--brown-dark);
+  margin-bottom: 8px;
+}
+
+.step__desc {
+  font-size: 13px;
+  color: var(--text-muted);
+  line-height: 1.75;
+}
+
+/* Arrow between steps */
+.step__arrow {
+  font-size: 26px;
+  color: rgba(139, 94, 60, 0.40);
+  padding-top: 14px;
+  align-self: flex-start;
+  flex-shrink: 0;
+}
+
+/* ============================================================
+   FOOTER
+   Dark background, light text with opacity
+   ============================================================ */
+.footer {
+  background-color: var(--brown-dark);
+  padding: 44px 60px 28px;
+}
+
+/* Top row: logo+tagline left, links right */
+.footer__top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 28px;
+  padding-bottom: 28px;
+  border-bottom: 1px solid rgba(196, 168, 130, 0.22);
+  margin-bottom: 20px;
+}
+
+.footer__logo {
+  font-family: 'Playfair Display', serif;
+  font-size: 20px;
+  letter-spacing: 2px;
+  color: var(--brown-light);
+}
+
+.footer__tagline {
+  font-size: 13px;
+  color: rgba(196, 168, 130, 0.75);          /* muted brown at 75% opacity */
+  margin-top: 6px;
+}
+
+/* Footer nav links */
+.footer__links {
+  display: flex;
+  gap: 28px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.footer__link {
+  color: rgba(196, 168, 130, 0.75);
+  text-decoration: none;
+  font-size: 13px;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.footer__link:hover {
+  color: var(--brown-light);
+}
+
+/* Copyright line */
+.footer__bottom {
+  text-align: center;
+  font-size: 12px;
+  color: rgba(196, 168, 130, 0.45);          /* very muted */
+}
+
+/* ============================================================
+   RESPONSIVE — TABLET  (max-width: 900px)
+   ============================================================ */
+@media (max-width: 900px) {
+  /* Navbar */
+  .navbar {
+    padding: 14px 28px;
+  }
+
+  /* Hide desktop links, show hamburger */
+  .navbar__links {
+    display: none;
+  }
+
+  .navbar__hamburger {
+    display: flex;
+  }
+
+  /* Hero: stack vertically */
+  .hero {
+    flex-direction: column;
+    align-items: center;
+    padding: 50px 28px 50px;
+    text-align: center;
+  }
+
+  .hero__left {
+    max-width: 100%;
+  }
+
+  .hero__title {
+    font-size: 36px;
+  }
+
+  .hero__subtitle {
+    max-width: 100%;
+  }
+
+  /* Cards: 2 columns */
+  .cards-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  /* Sections */
+  .section {
+    padding: 50px 28px;
+  }
+
+  /* Footer */
+  .footer {
+    padding: 36px 28px 24px;
+  }
+
+  .footer__top {
+    flex-direction: column;
+    gap: 20px;
+  }
+}
+
+/* ============================================================
+   RESPONSIVE — MOBILE  (max-width: 560px)
+   ============================================================ */
+@media (max-width: 560px) {
+  /* Hero */
+  .hero {
+    padding: 40px 20px 40px;
+  }
+
+  .hero__title {
+    font-size: 30px;
+  }
+
+  .hero__avatar {
+    width: 180px;
+    height: 210px;
+  }
+
+  .hero__avatar-emoji {
+    font-size: 64px;
+  }
+
+  /* Cards: 1 column */
+  .cards-grid {
+    grid-template-columns: 1fr;
+  }
+
+  /* Steps: stack vertically */
+  .steps-row {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .step__arrow {
+    transform: rotate(90deg);               /* arrow points down */
+    padding-top: 0;
+    padding-bottom: 4px;
+    align-self: center;
+  }
+
+  .step {
+    max-width: 100%;
+    width: 100%;
+  }
+
+  /* Section padding */
+  .section {
+    padding: 40px 20px;
+  }
+
+  /* Section title */
+  .section__title {
+    font-size: 24px;
+  }
+
+  /* Footer */
+  .footer {
+    padding: 30px 20px 20px;
+  }
+
+  .footer__links {
+    gap: 16px;
+  }
+}
