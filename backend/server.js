@@ -24,7 +24,7 @@ app.use(express.json());
 
 // CORS — frontend (localhost:5173) ko backend call karne do
 app.use(cors({
-  origin: "*",  // React app ka URL
+  origin: "https://persona-verse-mu.vercel.app",  // React app ka URL
   credentials: true,
 }));
 
